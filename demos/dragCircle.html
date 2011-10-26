@@ -15,21 +15,25 @@
     $(function() {
       // Create the canvas
       var paper = Raphael( 0, 0, $("#canvas").width(), $("#canvas").height());
-      
+
       // Use Canvas to Draw Circle
-      var c = paper.circle(200, 300, 70);
-      c.attr({fill: '#f00', stroke:'#000'});
+      var c = paper.circle(100, 100, 20);
+      c.attr({fill: '#f00', stroke:'#000'})
       
-      // Define hover in/out functions
-      var hoverIn = function() {
-        // Calling glow() will create a new glow object. 
-        // We are creating a new attribute 'glowing' to store the glow object. alternatively, you can create a variable to store it
-        this.glowing = this.glow({width: 60}); // If width is not specified, default is 10
+      var move = function(dx, dy, x, y){
+        // Glow does not have x and y attributes, so we have to destroy it, then create new after moving the object
+        this.glowing.remove()
+        this.attr({cx:x, cy:y}) // Set object's position to new position of mouse
+        this.glowing = this.glow()
       };
-      var hoverOut = function() {
+      var mouseDown = function(x, y, event) {
+        this.glowing = this.glow()
+      };
+      var mouseUp = function(x, y, event){
         this.glowing.remove()
       };
-      c.hover(hoverIn, hoverOut);
+      
+      c.drag(move, mouseDown, mouseUp)
       
     });
   </script>

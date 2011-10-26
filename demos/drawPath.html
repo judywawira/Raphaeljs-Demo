@@ -15,22 +15,16 @@
     $(function() {
       // Create the canvas
       var paper = Raphael( 0, 0, $("#canvas").width(), $("#canvas").height());
+
+      // Create Path String: 
+      // Format: 'M <startx> <starty> l <moveX> <moveY> l <moveX> <moveY>'
+      var line1 = paper.path('M 100 200 l 50 250 l 25 -10')
       
-      // Use Canvas to Draw Circle
-      var c = paper.circle(200, 300, 70);
-      c.attr({fill: '#f00', stroke:'#000'});
+      // Adding 'z' at end of path string will close line from last point to origin
+      var line1 = paper.path('M 500 200 l 50 250 l 25 -10 z')
       
-      // Define hover in/out functions
-      var hoverIn = function() {
-        // Calling glow() will create a new glow object. 
-        // We are creating a new attribute 'glowing' to store the glow object. alternatively, you can create a variable to store it
-        this.glowing = this.glow({width: 60}); // If width is not specified, default is 10
-      };
-      var hoverOut = function() {
-        this.glowing.remove()
-      };
-      c.hover(hoverIn, hoverOut);
-      
+      // Making lines look pretty:
+      line1.attr({stroke:'#00f', fill:'#0f0'})
     });
   </script>
   <!-- End of code -->
