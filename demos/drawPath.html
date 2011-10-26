@@ -18,13 +18,15 @@
 
       // Create Path String: 
       // Format: 'M <startx> <starty> l <moveX> <moveY> l <moveX> <moveY>'
-      var line1 = paper.path('M 100 200 l 50 250 l 25 -10')
+      var line1 = paper.path('M 50 100 l 100 0 l 0 -10')
       
       // Adding 'z' at end of path string will close line from last point to origin
-      var line1 = paper.path('M 500 200 l 50 250 l 25 -10 z')
+      var line2 = paper.path('M 50 150 l 20 50 l 125 0 z')
+      line2.attr({stroke:'#00f', fill:'#0f0'})      // Making lines look pretty:
       
-      // Making lines look pretty:
-      line1.attr({stroke:'#00f', fill:'#0f0'})
+      // Curve. q = quadratic Bézier curveto- has 4 inputs: (relative point x, relative point y, endAt x, endAt y)
+      var curve1 = paper.path('M 50 250 q 100 50 200 0')
+      
     });
   </script>
   <!-- End of code -->
