@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>LONI</title>
+	<link rel="stylesheet" href="stylesheets/style.css" />
+	<script type="text/javascript" src='javascripts/jquery-1.6.4.min.js'></script>
+	<script type="text/javascript" src='javascripts/raphael.js'></script>
+</head>
+<body>
+	<div id="canvas"></div>
+  
+  <!-- Code is all contained here: -->
+  <script type="text/javascript">
+    $(function() {
+      // Create the canvas
+      var paper = Raphael( 0, 0, $("#canvas").width(), $("#canvas").height());
+      
+      var startDraw = false;
+      var line;
+      var startx, starty;
+      
+      $('body').mousedown(function(e) {
+        startDraw= true;
+        // On Mouse down, keep track of the starting point: used as pivot
+        startx = e.offsetX;
+        starty = e.offsetY;
+      })
+      .mousemove(function(e){
+        if(startDraw){
+          if(line!= undefined) line.remove()
+          line = paper.path('M'+startx+','+starty+ 'L'+e.layerX+','+e.layerY)
+        }
+      })
+      .mouseup(function() {
+        startDraw=false;
+        line = undefined; //This will make sure the new line will not be removed.
+      })
+
+    });
+  </script>
+  <!-- End of code -->
+  
+</body>
+</html>
